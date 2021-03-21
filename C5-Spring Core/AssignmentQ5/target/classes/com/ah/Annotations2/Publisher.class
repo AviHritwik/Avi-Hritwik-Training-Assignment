@@ -1,0 +1,14 @@
+Êþº¾   1 7  com/ah/Annotations2/Publisher  java/lang/Object publisherName Ljava/lang/String; publisherId I getPublisherName ()Ljava/lang/String; Code	     LineNumberTable LocalVariableTable this Lcom/ah/Annotations2/Publisher; setPublisherName (Ljava/lang/String;)V RuntimeVisibleAnnotations 7Lorg/springframework/beans/factory/annotation/Required; getPublisherId ()I	     setPublisherId (I)V <init> (Ljava/lang/String;I)V
+      ()V toString # java/lang/StringBuilder % Publisher [publisherName=
+ " '  
+ " ) * + append -(Ljava/lang/String;)Ljava/lang/StringBuilder; - , publisherId=
+ " / * 0 (I)Ljava/lang/StringBuilder; 2 ]
+ " 4 ! 
+ 
+SourceFile Publisher.java !                  	 
+     /     *´ °           
+                            >     *+µ ±       
+                                /     *´ ¬                               >     *µ ±       
+                                Y     *· *+µ *µ ±              	                                     3     *· ±       
+                    ! 
+     O     %» "Y$· &*´ ¶ (,¶ (*´ ¶ .1¶ (¶ 3°           !        %      5    6

@@ -1,0 +1,17 @@
+Êþº¾   1 E  com/ah/Annotations2/Author  java/lang/Object 
+authorName Ljava/lang/String; authorId I 	publisher Lcom/ah/Annotations2/Publisher; getPublisher !()Lcom/ah/Annotations2/Publisher; Code	   	 
+ LineNumberTable LocalVariableTable this Lcom/ah/Annotations2/Author; setPublisher "(Lcom/ah/Annotations2/Publisher;)V RuntimeVisibleAnnotations Ljavax/inject/Inject; getAuthorName ()Ljava/lang/String;	     setAuthorName (Ljava/lang/String;)V 7Lorg/springframework/beans/factory/annotation/Required; getAuthorId ()I	  "   setAuthorId (I)V <init> ()V
+  ( % & 5(Ljava/lang/String;ILcom/ah/Annotations2/Publisher;)V toString , java/lang/StringBuilder . Author [authorName=
+ + 0 % 
+ + 2 3 4 append -(Ljava/lang/String;)Ljava/lang/StringBuilder; 6 , authorId=
+ + 8 3 9 (I)Ljava/lang/StringBuilder; ; , publisher=
+ + = 3 > -(Ljava/lang/Object;)Ljava/lang/StringBuilder; @ ]
+ + B *  
+SourceFile Author.java !                 	 
+   	        /     *´ °                                       >     *+µ ±       
+                      	 
+         /     *´ °                                       >     *+µ ±       
+                                 /     *´ !¬                         # $     >     *µ !±       
+    !  "                    % &     3     *· '±       
+    $  &              % )     l     *· '*+µ *µ !*-µ ±           (  ) 	 *  +  ,    *                        	 
+   *      [     1» +Y-· /*´ ¶ 15¶ 1*´ !¶ 7:¶ 1*´ ¶ <?¶ 1¶ A°           /        1      C    D

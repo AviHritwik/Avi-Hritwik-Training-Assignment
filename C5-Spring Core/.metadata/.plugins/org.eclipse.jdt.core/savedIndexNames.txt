@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+F:\capgemini\Temporary Assignment\C5-Spring Core\.metadata\.plugins\org.eclipse.jdt.core
+619813928.index

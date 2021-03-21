@@ -1,0 +1,11 @@
+Êþº¾   1 5  com/ah/Annotations2/App  java/lang/Object <init> ()V Code
+  	   LineNumberTable LocalVariableTable this Lcom/ah/Annotations2/App; main ([Ljava/lang/String;)V  Borg/springframework/context/support/ClassPathXmlApplicationContext  
+config.xml
+     (Ljava/lang/String;)V  Book    .org/springframework/context/ApplicationContext   getBean &(Ljava/lang/String;)Ljava/lang/Object;   com/ks/Annotations2/Book	 " $ # java/lang/System % & out Ljava/io/PrintStream;
+ ( * ) java/io/PrintStream + , println (Ljava/lang/Object;)V args [Ljava/lang/String; context 0Lorg/springframework/context/ApplicationContext; book Lcom/ks/Annotations2/Book; 
+SourceFile App.java !               /     *· ±    
+                    	       h     » Y· L+¹  À M² !,¶ '±    
+       
+ 
+               - .   
+  / 0    1 2   3    4
