@@ -1,0 +1,5 @@
+package com.washservice.authservice.security;
+
+public class JwtUsernameAndPasswordAuthenticationFilter {
+
+}

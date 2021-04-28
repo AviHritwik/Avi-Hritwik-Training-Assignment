@@ -1,0 +1,101 @@
+package com.washSystem.orders;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.client.HttpClientErrorException;
+
+import com.washSystem.orders.model.Address;
+import com.washSystem.orders.model.Cars;
+import com.washSystem.orders.model.Order;
+import com.washSystem.orders.service.OrderService;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class OrderControllerIntegrationTesting {
+	@Autowired
+    private TestRestTemplate restTemplate;
+	
+	@LocalServerPort
+    private int port;
+	
+	@Autowired
+    OrderService service;
+	
+	private String getRootUrl() {
+        return "http://localhost:" + port;
+    }
+
+    @Test
+    public void contextLoads() {
+
+    }
+    
+    @Test
+    public void testGetAllOrders() {
+    HttpHeaders headers = new HttpHeaders();
+       HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+       ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/findAllOrder",
+       HttpMethod.GET, entity, String.class);
+       assertNotNull(response.getBody());
+   }
+    
+    @Test
+    public void testGetOrderById() {
+        Order order = restTemplate.getForObject(getRootUrl() + "findOrder/1014", Order.class);
+        System.out.println(order.getStatus());
+        assertNotNull(order);
+    }
+    
+    @Test
+    public void testSaveOrder() {
+    	
+        Order order = new Order();
+        order.setOrderId(1);
+        order.setUserId(1);
+        order.setWasherId(1);
+        order.setAmount(1);
+        Address address = new Address("a","a","a","a","101101");
+        order.setAddress(address);
+        order.setStatus("A");
+        Cars car = new Cars("M","m","m","m");
+        ResponseEntity<String> postResponse = restTemplate.postForEntity(getRootUrl() + "/addOrder", order, String.class);
+        assertNotNull(postResponse);
+        assertThat(postResponse.getBody()).isEqualTo("Added order with id : 1");
+        assertThat(postResponse.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+    }
+    
+    @Test
+    public void testDeleteOrder(){
+    	String message = restTemplate.getForObject(getRootUrl() + "/deleteOrder/1", String.class);
+    	assertThat(message).isEqualTo("order deleted with id : 1");
+    }
+    
+    @Test
+    public void testDeleteEmployee() {
+         int id = 2;
+         Order order = restTemplate.getForObject(getRootUrl() + "/order/" + id, Order.class);
+         assertNotNull(order);
+         restTemplate.delete(getRootUrl() + "/employees/" + id);
+         try {
+        	 order = restTemplate.getForObject(getRootUrl() + "/order/" + id, Order.class);
+         } catch (final HttpClientErrorException e) {
+              assertThat(e.getStatusCode(), HttpStatus.NOT_FOUND);
+         }
+         
+    }
+    
+    
+}

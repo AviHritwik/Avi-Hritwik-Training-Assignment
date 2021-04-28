@@ -1,0 +1,79 @@
+package com.washSystem.user.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.washSystem.user.sequence.SequenceGeneratorService;
+import com.washSystem.user.model.Address;
+import com.washSystem.user.model.Customer;
+import com.washSystem.user.model.Washer;
+import com.washSystem.user.repository.CustomerRepository;
+
+@Service
+public class CustomerService {
+	
+	@Autowired
+	CustomerRepository repo;
+	
+	@Autowired
+	SequenceGeneratorService sequenceGeneratorService;
+	
+	public long saveUser(Customer customer) {
+		customer.setStatus(true);
+		repo.save(customer);
+		return customer.getCustomerID();
+	}
+	
+	public List<Customer> getCustomers() throws Exception{
+		List<Customer> customerList= repo.findAll();
+		if(customerList.isEmpty())
+			throw new Exception();
+		return customerList;
+	}
+	
+	public Customer getCustomer(Long id) throws IllegalArgumentException,Exception {
+		Customer customer = repo.findById(id).orElseThrow();
+		
+		return customer;
+	}
+
+	public void deleteCustomer(Long id) throws IllegalArgumentException,Exception {
+		Customer customer = repo.findById(id).orElseThrow();
+		repo.deleteById(id);
+	}
+	
+	public Customer updateCustomer(long id,Customer updatedCustomer) throws IllegalArgumentException,Exception{
+		Customer customer = repo.findById(id).orElseThrow(()-> new Exception());
+		customer.setCustomerEmail(updatedCustomer.getCustomerEmail());
+		customer.setCustomerID(updatedCustomer.getCustomerID());
+		customer.setCustomerName(updatedCustomer.getCustomerName());
+    	customer.setCustomerAddress(updatedCustomer.getCustomerAddress());
+    	customer.setCardDetails(updatedCustomer.getCardDetails());
+    	customer.setCars(updatedCustomer.getCars());
+        final Customer newCustomer = repo.save(customer);
+    	return newCustomer;
+    }
+	
+	public void addAddress(long id, Address address) throws IllegalArgumentException,Exception
+	{
+		Customer customer = repo.findById(id).orElseThrow(()-> new Exception());
+		List<Address> adressList = customer.getCustomerAddress();
+		adressList.add(address);
+		repo.save(customer);
+	}
+	
+	public ResponseEntity<?> changeStatus(long id) throws Exception{
+		Customer customer = repo.findById(id).orElseThrow(()-> new Exception());
+		if(customer.getStatus())
+			customer.setStatus(false);
+		else
+			customer.setStatus(true);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+}

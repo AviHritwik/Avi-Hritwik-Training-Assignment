@@ -1,0 +1,19 @@
+package com.bezkoder.spring.jwt.mongodb.payload.request;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.Id;
+
+public class Customer {
+
+	@Id
+	private long customerID;
+	@NotBlank(message = "Email is Compulsory")
+	@Email
+	private String customerEmail;
+	@NotBlank(message = "Name is Compulsory")
+	@Size(min=3)
+	private String customerName;
+}
